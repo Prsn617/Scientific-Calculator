@@ -30,4 +30,4 @@ Note: For unary operators such as, sin, cos, log, ln etc. the data can only be p
 
 ### Responsive and Dark mode available
 
-![Calculator](https://github.com/Prsn617/Scientific-Calculator/tree/main/images/calc-dark.png)
+![Calculator](images/calc-dark.png)
