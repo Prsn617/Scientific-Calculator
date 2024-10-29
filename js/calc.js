@@ -7,6 +7,7 @@ let priority = {
   '/': 3,
   '^': 4,
 };
+let unary_operators = ['s', 'c', 't', 'l', 'n'];
 
 const helper = new Helper(priority);
 
@@ -50,40 +51,12 @@ function convertIntoToken(input) {
 }
 
 function convertToPostfix(arr, isDegree) {
-  console.log(arr);
   let operatorList = [];
   let outputList = [];
   for (let i = 0; i < arr.length; i++) {
     if (helper.isNotOperator(arr[i])) {
       let actual_data;
-      switch (true) {
-        case arr[i].includes('s'):
-          actual_data = arr[i].replace('s', '');
-          helper.calculateTrig('s', outputList, actual_data, isDegree);
-          break;
-        case arr[i].includes('c'):
-          actual_data = arr[i].replace('c', '');
-          helper.calculateTrig('c', outputList, actual_data, isDegree);
-          break;
-        case arr[i].includes('t'):
-          actual_data = arr[i].replace('t', '');
-          helper.calculateTrig('t', outputList, actual_data, isDegree);
-          break;
-        case arr[i].includes('l'):
-          actual_data = arr[i].replace('l', '');
-          let calc_log =
-            actual_data === '' ? 'l' : helper.roundValue(Math.log(actual_data));
-          outputList.push(calc_log);
-          break;
-        case arr[i].includes('n'):
-          actual_data = arr[i].replace('n', '');
-          let calc_ln =
-            actual_data === '' ? 'l' : helper.roundValue(Math.log(actual_data));
-          outputList.push(calc_ln);
-          break;
-        default:
-          outputList.push(arr[i]);
-      }
+      outputList.push(arr[i]);
     } else if (arr[i] === ')') {
       helper.flushParenthesis(operatorList, outputList);
     } else if (helper.isValidOperator(arr[i], operatorList)) {
@@ -105,11 +78,32 @@ function convertToPostfix(arr, isDegree) {
 }
 
 function calculatePostFix(arr) {
-  console.log(arr);
   let stack = [];
   for (let i = 0; i < arr.length; i++) {
-    if (!(arr[i] in priority)) {
+    if (!(arr[i] in priority) && !unary_operators.includes(arr[i])) {
       stack.push(arr[i]);
+    } else if (unary_operators.includes(arr[i])) {
+      let num = Number(stack.pop());
+      let result = 0;
+      switch (arr[i]) {
+        case 's':
+          result = helper.roundValue(Math.sin(num));
+
+          break;
+        case 'c':
+          result = helper.roundValue(Math.cos(num));
+          break;
+        case 't':
+          result = helper.roundValue(Math.tan(num));
+          break;
+        case 'l':
+          result = helper.roundValue(Math.log(num));
+          break;
+        case 'n':
+          result = helper.roundValue(Math.log(num));
+          break;
+      }
+      stack.push(result);
     } else {
       let num2 = Number(stack.pop());
       let num1 = Number(stack.pop());
@@ -134,19 +128,13 @@ function calculatePostFix(arr) {
       stack.push(result);
     }
   }
-  if (stack.length === 2 && helper.scientificOperations.includes(stack[0])) {
-    let last_data = stack.pop();
-    let final_result = helper.calculateTrigFinal(last_data, stack[0]);
-    stack = [final_result];
-  }
+
   let final_result = stack.length === 1 ? stack[0] : 'Error';
 
   return isNaN(final_result) ? 'Error' : final_result;
 }
 
 function calculate(userInput, isDegree) {
-  console.log(userInput);
-
   userInput += '#';
   let token_data = convertIntoToken(userInput);
   let postfix_data = convertToPostfix(token_data, isDegree);
@@ -155,5 +143,4 @@ function calculate(userInput, isDegree) {
   return result;
 }
 
-// console.log(calculate('s30+c30'));
 export { calculate };

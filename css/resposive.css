@@ -1,0 +1,40 @@
+@media only screen and (max-width: 650px) {
+  body {
+    --btn-height: 36px;
+  }
+
+  header {
+    .theme-toggler {
+      right: 40px;
+    }
+  }
+
+  .calc-container {
+    width: 280px;
+    gap: 36px;
+  }
+
+  .display {
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .numbers,
+  .operators {
+    span {
+      font-size: 1rem;
+    }
+  }
+
+  .numbers {
+    gap: 8px;
+  }
+
+  .selector {
+    right: -37px;
+    span {
+      padding: 5px;
+      font-size: 0.8rem;
+    }
+  }
+}

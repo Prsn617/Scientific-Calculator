@@ -42,7 +42,12 @@ export class Helper {
   }
 
   isNotOperator(str) {
-    if (!(str in this.priority) && str !== '(' && str !== ')') {
+    if (
+      !(str in this.priority) &&
+      str !== '(' &&
+      str !== ')' &&
+      !this.scientificOperations.includes(str)
+    ) {
       return true;
     }
     return false;
@@ -56,7 +61,7 @@ export class Helper {
       }
       operator.pop();
     } else {
-      console.log(`Error`);
+      output.push('Error');
     }
   }
 
@@ -71,6 +76,9 @@ export class Helper {
       if (this.priority[str] > this.priority[operator[operator.length - 1]]) {
         return true;
       }
+    }
+    if (this.scientificOperations.includes(str)) {
+      return true;
     }
     return false;
   }

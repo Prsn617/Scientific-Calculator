@@ -10,13 +10,16 @@
 
 html,
 body {
-  --secondary-clr: #c7b05b;
-  min-height: 100vh;
-  --background-clr: #cdcdcd;
   scroll-behavior: smooth;
-  background-color: var(--background-clr);
+}
+
+body {
+  --secondary-clr: #c7b05b;
+  --background-clr: #cdcdcd;
   --shadow-main: #b4b4b4;
   --shadow-sec: #eee;
+  background-color: var(--background-clr);
+  --btn-height: 60px;
 }
 
 .dark {

@@ -37,7 +37,6 @@ all_data.forEach((item) => {
       main_display.innerHTML = input_data;
       prev_display.innerHTML = input_data;
     } else if (item.id === 'back') {
-      console.log(input_data);
       input_data = input_data.slice(0, -1);
       main_display.innerHTML = input_data;
     } else {
