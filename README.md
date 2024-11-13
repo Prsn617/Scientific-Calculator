@@ -30,4 +30,9 @@ Note: For unary operators such as, sin, cos, log, ln etc. the data can only be p
 
 ### Responsive and Dark mode available
 
-![Calculator](images/calc-dark.png)
+<p align="center"><img width="300" src="images/calc-dark.png" /> <img width="300" src="images/calc-light.png" /></p>
+
+## Project Inspiration and Research
+
+- Redstone Calculator in Minecraft -<a href="https://www.youtube.com/watch?v=BoYUFHTH5NQ&t=148s">Youtube Link</a>
+- Shunting Yard Algorithm -<a href="https://www.youtube.com/watch?v=unh6aK8WMwM&t=1782s">Youtube Link</a>
